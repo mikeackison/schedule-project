@@ -118,13 +118,13 @@ storiesOf('DayListItem', module) //Initiates Storybook and registers our DayList
         .add("Initial", () => (
           <InterviewerList
             interviewers={interviewers}
-            setInterviewer={action("setInterviewer")}
+            onChange={action("setInterviewer")}
           />
         ))
         .add("Preselected", () => (
           <InterviewerList
             interviewers={interviewers}
-            interviewer={3}
+            value={3}
             setInterviewer={action("setInterviewer")}
           />
         ));
