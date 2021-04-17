@@ -6,24 +6,24 @@ import 'styles/Application.scss';
 const days = [
   {
     id: 1,
-    name: "Monday",
+    name: 'Monday',
     spots: 2,
   },
   {
     id: 2,
-    name: "Tuesday",
+    name: 'Tuesday',
     spots: 5,
   },
   {
     id: 3,
-    name: "Wednesday",
+    name: 'Wednesday',
     spots: 0,
   },
 ];
 
 
 export default function Application(props) {
-  const [day, setDay] = useState("Monday");
+  const [day, setDay] = useState('Monday');
   // set default day to Monday
   return (
     <main className='layout'>
@@ -41,7 +41,7 @@ export default function Application(props) {
         </nav>
       </section>
       <section className='schedule'>
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {/* Replace this with the schedule elements durint the 'The Scheduler' activity. */}
       </section>
     </main>
   );

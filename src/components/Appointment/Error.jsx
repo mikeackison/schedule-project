@@ -9,9 +9,9 @@ export default function Error(props) {
         <h3 className='text--light'>{props.message}</h3>
       </section>
       <img 
-        className="appointment__error-close"
-        src="images/close.png"
-        alt="Close"
+        className='appointment__error-close'
+        src='images/close.png'
+        alt='Close'
         onClick={props.onClose}
       />
     </main>

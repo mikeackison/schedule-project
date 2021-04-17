@@ -1,6 +1,6 @@
 import React from 'react';
 
-import 'components/Appointment/styles.scss';
+import 'styles/styles.scss';
 
 
 const classNames = require('classnames')
