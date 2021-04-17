@@ -16,6 +16,7 @@ return(
     {/* all appointments render header with time props */}
     <Header time={props.time}/>
     {/* if props interview is true show the appointment, otherwise show empty */}
+    {/* need to update the props to incled interview */}
     { (props.interview) ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty/> }
   </article>
 );
