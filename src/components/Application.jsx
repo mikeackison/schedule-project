@@ -83,7 +83,8 @@ export default function Application(props) {
       console.log(response.data);
     });
   }, [] )
-
+  // empty dependency array when state changes use effect will execute
+  // empty dependency prevents infintite loop
 
   return (
     <main className='layout'>
