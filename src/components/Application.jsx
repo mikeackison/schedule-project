@@ -59,11 +59,24 @@ const appointments = [
 
 export default function Application(props) {
   
-  const [day, setDay] = useState('Monday');
-  // set default day to Monday
-  
-  const [ days, setDays ] = useState([])
-  // add a days state - needs to be inside the function
+  // const [day, setDay] = useState('Monday');
+  // // set default day to Monday
+  // const [ days, setDays ] = useState([])
+  // // add a days state - needs to be inside the function
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: []
+  });
+ 
+
+  // need to update the day and days state
+  // pass a fucntion to setState in setDays
+  const setDay = day => setState({ ...state, day });
+  const setDays = (days) => {
+    setState(prev => ({ ...prev, days }));;
+}
+
 
   const appointment = appointments.map(appointment => {
     return(
@@ -98,7 +111,7 @@ export default function Application(props) {
         <nav className='sidebar__menu'>
 
         {/* receive the value and the function */}
-        <DayList days={days} day={day} setDay={setDay} />
+        <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
       </section>
       <section className='schedule'>
