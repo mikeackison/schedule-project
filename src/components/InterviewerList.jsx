@@ -5,7 +5,11 @@ import InterviewerListItem from 'components/InterviewerListItem';
  
 export default function InterviewerList(props) {
 
-  const interviewers = props.interviewers.map(interviewer => {
+  const temporaryPropsInterviewers = []
+
+  const interviewers = temporaryPropsInterviewers.map(interviewer => {
+
+     // temporarlily set ^^^^^^^^^ <props.inteviewers> to an empty array  on INTERVIEW LIST
     return (
       <InterviewerListItem
         key={interviewer.id}
