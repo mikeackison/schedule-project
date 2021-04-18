@@ -24,11 +24,6 @@ export default function Application(props) {
   // need to update the day and days state
   // pass a fucntion to setState in setDays
   const setDay = day => setState({ ...state, day });
-  
-  // const setDays = (days) => {
-    //   setState(prev => ({ ...prev, days }));;
-    // }
-    
     
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
@@ -39,10 +34,10 @@ export default function Application(props) {
   
       <Appointment
       key={appointment.id}
-      // {...appointment}
-      id={appointment.id}
-      time={appointment.time}
-      interview={interview}
+      {...appointment}
+      // id={appointment.id}
+      // time={appointment.time}
+      // interview={interview}
       
       />
     );
