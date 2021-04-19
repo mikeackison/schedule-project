@@ -6,6 +6,7 @@ import Show from 'components/Appointment/Show';
 import Empty from 'components/Appointment/Empty';
 import Form from 'components/Appointment/Form';
 import Status from 'components/Appointment/Status'
+import Confirm from 'components/Appointment/Confirm'
 
 import bookInterview from "components/Application"
 
@@ -16,6 +17,7 @@ const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const DELETE = 'DELETE'
+const CONFIRM = 'CONFIRM'
 
 
 
@@ -62,12 +64,14 @@ return(
   <Show
     student={props.interview.student}
     interviewer={props.interview.interviewer}
-    onDelete={cancelInterview}
+    // onDelete={cancelInterview}
+    onDelete={() => transition(CONFIRM)}
   />
 )}
     {mode === CREATE && <Form onSave={save}  interviewers={props.interviewers} onCancel={() => back(EMPTY)} />}
     {mode === SAVING && <Status message='Saving'/>}
     {mode === DELETE && <Status message='Deleteing' />}
+    {mode === CONFIRM && <Confirm  message='Delete Appointment?' onConfirm={cancelInterview} />}
   </article>
 );
 }
