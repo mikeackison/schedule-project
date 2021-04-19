@@ -69,4 +69,5 @@ export default function useApplicationData() {
   // empty dependency prevents infintite loop
 
   return {setDay, deleteInterview, bookInterview, state}
+  // funtion needs to return
 }
