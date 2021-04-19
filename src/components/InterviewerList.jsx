@@ -7,7 +7,7 @@ export default function InterviewerList(props) {
 
   const temporaryPropsInterviewers = []
 
-  const interviewers = temporaryPropsInterviewers.map(interviewer => {
+  const interviewers = props.interviewers.map(interviewer => {
 
      // temporarlily set ^^^^^^^^^ <props.inteviewers> to an empty array  on INTERVIEW LIST
     return (

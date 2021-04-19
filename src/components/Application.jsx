@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DayList from 'components/DayList'
 import Appointment from 'components/Appointment';
-import { getAppointmentsForDay, getInterview } from "../helpers/selectors"
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors"
 import axios from 'axios'
 
 import 'styles/Application.scss';
@@ -20,7 +20,29 @@ export default function Application(props) {
     interviewers: {}
   });
  
-  
+  const interviewers = getInterviewersForDay(state, state.day)
+
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({
+      ...state,
+      appointments
+    });
+   
+  }
+
+
+ 
   // need to update the day and days state
   // pass a fucntion to setState in setDays
   const setDay = day => setState({ ...state, day });
@@ -38,6 +60,8 @@ export default function Application(props) {
       // id={appointment.id}
       // time={appointment.time}
       interview={interview}
+      interviewers={interviewers}
+      bookInterview={bookInterview}
       
       />
     );
