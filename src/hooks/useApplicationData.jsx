@@ -75,8 +75,8 @@ export default function useApplicationData() {
   const updateSpots = (state) => {
     const days = state.days.map((dayObject) => {
       let availableSpots = 0;
-      
-      dayObject.appointments.forEach(numID => {
+      let tempNewDayObject = {...dayObject}
+      tempNewDayObject.appointments.forEach(numID => {
 
         if (!state.appointments[numID].interview) {
           availableSpots++
