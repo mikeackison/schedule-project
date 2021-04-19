@@ -21,9 +21,11 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+
+    const days = updateSpots({...state, appointments})
   
     return axios.put(`/api/appointments/${id}`, {interview})
-    .then(response => setState({...state, appointments}))
+    .then(response => setState({...state, appointments, days}))
   }
 
   const deleteInterview = (id, interview) => {
@@ -37,8 +39,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    const days = updateSpots({...state, appointments})
+
     return axios.delete(`/api/appointments/${id}`)
-    .then((response) => { setState({...state, appointments})
+    .then((response) => { setState({...state, appointments, days})
   })
   }
 
@@ -67,6 +71,24 @@ export default function useApplicationData() {
 
   // empty dependency array when state changes use effect will execute
   // empty dependency prevents infintite loop
+
+  const updateSpots = (state) => {
+    const days = state.days.map((dayObject) => {
+      let availableSpots = 0;
+      
+      dayObject.appointments.forEach(numID => {
+
+        if (!state.appointments[numID].interview) {
+          availableSpots++
+          }
+      })
+
+      dayObject.spots = availableSpots;
+      return dayObject;
+    })
+
+    return days
+  }
 
   return {setDay, deleteInterview, bookInterview, state}
   // funtion needs to return
