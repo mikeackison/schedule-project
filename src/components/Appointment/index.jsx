@@ -26,6 +26,8 @@ const EDIT = 'EDIT'
 
 export default function Appointment(props) {
 
+  console.log("Appointment", props.interview)
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
