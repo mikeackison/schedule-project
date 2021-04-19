@@ -5,7 +5,7 @@ import InterviewerListItem from 'components/InterviewerListItem';
  
 export default function InterviewerList(props) {
 
-  const temporaryPropsInterviewers = []
+  // const temporaryPropsInterviewers = []
 
   const interviewers = props.interviewers.map(interviewer => {
 
