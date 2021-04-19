@@ -15,6 +15,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
+const DELETE = 'DELETE'
 
 
 
@@ -27,7 +28,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  const save= (name, interviewer) => {
+  const save = (name, interviewer) => {
 
     const interview = {
       student: name,
@@ -36,6 +37,14 @@ export default function Appointment(props) {
     transition(SAVING)
     props.bookInterview(props.id, interview).then(response => transition(SHOW))
 
+  }
+
+  const cancelInterview = () => {
+
+    transition(DELETE)
+    props.cancelInterview(props.id).then(() => {
+      transition(EMPTY)
+    })
   }
 
 
@@ -53,10 +62,12 @@ return(
   <Show
     student={props.interview.student}
     interviewer={props.interview.interviewer}
+    onDelete={cancelInterview}
   />
 )}
     {mode === CREATE && <Form onSave={save}  interviewers={props.interviewers} onCancel={() => back(EMPTY)} />}
     {mode === SAVING && <Status message='Saving'/>}
+    {mode === DELETE && <Status message='Deleteing' />}
   </article>
 );
 }
