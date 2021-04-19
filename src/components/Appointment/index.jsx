@@ -71,7 +71,7 @@ return(
     {mode === CREATE && <Form onSave={save}  interviewers={props.interviewers} onCancel={() => back(EMPTY)} />}
     {mode === SAVING && <Status message='Saving'/>}
     {mode === DELETE && <Status message='Deleteing' />}
-    {mode === CONFIRM && <Confirm  message='Delete Appointment?' onConfirm={cancelInterview} />}
+    {mode === CONFIRM && <Confirm  message='Delete Appointment?' onConfirm={cancelInterview} onCancel={() => back()}/>}
   </article>
 );
 }
