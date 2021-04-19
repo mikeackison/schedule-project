@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
 
+ 
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -11,7 +12,7 @@ export default function useApplicationData() {
   });
 
   const bookInterview = (id, interview) => {
-    console.log(id, interview);
+    // console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -50,7 +51,22 @@ export default function useApplicationData() {
   // pass a fucntion to setState in setDays
   const setDay = day => setState({ ...state, day });
 
+  
+
+
   useEffect(() => {
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+    // webSocket.onopen = function (event) {
+    //   webSocket.send('ping');
+    //   console.log('Message', event)
+      
+    // };
+    
+    webSocket.onmessage = function (event) {
+      console.log(JSON.parse(event.data));
+    }
+
     const GET_DAYS = '/api/days'
     const GET_APPOINTMENTS = '/api/appointments'
     const GET_INTERVIEWERS = '/api/interviewers'
@@ -59,8 +75,8 @@ export default function useApplicationData() {
       axios.get(GET_APPOINTMENTS),
       axios.get(GET_INTERVIEWERS)
     ]).then((all) => {
-      console.log(all)
-      console.log(all[2].data)
+      // console.log(all)
+      // console.log(all[2].data)
       setState(prev => ({
         ...prev, days: all[0].data,
         appointments: all[1].data,
