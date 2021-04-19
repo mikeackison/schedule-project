@@ -18,13 +18,13 @@ const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const DELETE = 'DELETE'
 const CONFIRM = 'CONFIRM'
+const EDIT = 'EDIT'
 
 
 
 // const classNames = require('classnames')
 
 export default function Appointment(props) {
-
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -61,17 +61,34 @@ return(
     {/* { (props.interview) ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty/> } */}
     {mode === EMPTY && <Empty onAdd={() =>transition(CREATE)} />}
     {mode === SHOW && (
-  <Show
-    student={props.interview.student}
-    interviewer={props.interview.interviewer}
-    // onDelete={cancelInterview}
-    onDelete={() => transition(CONFIRM)}
-  />
-)}
-    {mode === CREATE && <Form onSave={save}  interviewers={props.interviewers} onCancel={() => back(EMPTY)} />}
-    {mode === SAVING && <Status message='Saving'/>}
-    {mode === DELETE && <Status message='Deleteing' />}
-    {mode === CONFIRM && <Confirm  message='Delete Appointment?' onConfirm={cancelInterview} onCancel={() => back()}/>}
+      <Show
+        student={props.interview.student}
+        interviewer={props.interview.interviewer}
+        // onDelete={cancelInterview}
+        onDelete={() => transition(CONFIRM)}
+        onEdit={() => transition(EDIT)}
+      />
+    )}
+    {mode === CREATE && ( <Form onSave={save}  interviewers={props.interviewers} onCancel={() => back(EMPTY)} 
+      />
+    )}
+    {mode === EDIT && (<Form 
+      name={props.interview.student}
+      interviewers={props.interviewers}
+      interviewer={props.interview.interviewer.id}
+      student={props.student}
+      onSave={save}
+      onCancel={() => back()}
+      />
+    )}
+    {mode === SAVING && (<Status message='Saving'/>)}
+    {mode === DELETE && (<Status message='Deleteing' />)}
+    {mode === CONFIRM && (<Confirm 
+      message='Delete Appointment?' 
+      onConfirm={cancelInterview} 
+      onCancel={() => back(SHOW)}
+    />
+    )}
   </article>
 );
 }
