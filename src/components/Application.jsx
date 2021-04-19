@@ -34,11 +34,12 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
+    // setState({
+    //   ...state,
+    //   appointments
+    // });
    
+    return axios.put(`/api/appointments/${id}`, {interview}).then(response => setState({...state, appointments}))
   }
 
 
