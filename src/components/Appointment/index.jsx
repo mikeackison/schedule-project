@@ -6,7 +6,7 @@ import Show from 'components/Appointment/Show';
 import Empty from 'components/Appointment/Empty';
 import Form from 'components/Appointment/Form';
 
-// import bookInterview from "components/Application"
+import bookInterview from "components/Application"
 
 import useVisualMode from 'hooks/useVisualMode';
 
@@ -33,6 +33,7 @@ export default function Appointment(props) {
       interviewer
     };
     props.bookInterview(props.id, interview)
+    transition(SHOW)
   }
 
 
