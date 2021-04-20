@@ -113,10 +113,6 @@ function reducer(state, action){
   // need to update the day and days state
   // pass a fucntion to setState in setDays
   
-
-  
-
-
   useEffect(() => {
     const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
