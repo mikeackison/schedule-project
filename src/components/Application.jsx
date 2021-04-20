@@ -17,6 +17,8 @@ export default function Application(props) {
 
   } = useApplicationData();
  
+console.log("STATE", state)
+
   const interviewers = getInterviewersForDay(state, state.day)
     
   const dailyAppointments = getAppointmentsForDay(state, state.day);

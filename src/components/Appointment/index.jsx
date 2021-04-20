@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'styles/styles.scss';
 
 import Header from 'components/Appointment/Header';
@@ -27,11 +27,21 @@ const ERROR_DELETE = 'ERROR_DELETE'
 
 export default function Appointment(props) {
 
-  console.log("Appointment", props.interview)
+  // console.log("Appointment", props.interview)
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+
+  useEffect(() => {
+    if(mode === EMPTY && props.interview) {
+      transition(SHOW)
+    }
+
+    if(mode === SHOW && !props.interview) {
+      transition(EMPTY)
+    }
+  }, [props.interview, mode, transition]) 
 
   const save = (name, interviewer) => {
 
@@ -63,8 +73,9 @@ return(
     {/* if props interview is true show the appointment, otherwise show empty */}
     {/* need to update the props to incled interview */}
     {/* { (props.interview) ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty/> } */}
-    {mode === EMPTY && <Empty onAdd={() =>transition(CREATE)} />}
-    {mode === SHOW && (
+    {mode === EMPTY && !props.interview && <Empty onAdd={() =>transition(CREATE)} />}
+    {mode === SHOW && props.interview && (
+      
       <Show
         student={props.interview.student}
         interviewer={props.interview.interviewer}
