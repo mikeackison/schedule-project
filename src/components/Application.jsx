@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DayList from 'components/DayList'
 import Appointment from 'components/Appointment';
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors"
@@ -8,36 +8,36 @@ import useApplicationData from 'hooks/useApplicationData'
 import 'styles/Application.scss';
 
 export default function Application(props) {
-  
+
   const {
-    state, 
+    state,
     setDay,
     bookInterview,
     deleteInterview
 
   } = useApplicationData();
- 
-console.log("STATE", state)
+
+  console.log("STATE", state)
 
   const interviewers = getInterviewersForDay(state, state.day)
-    
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const appointment = dailyAppointments.map(appointment => {
-    const interview = getInterview(state, appointment.interview); 
+    const interview = getInterview(state, appointment.interview);
 
-    return(
-  
+    return (
+
       <Appointment
-      key={appointment.id}
-      {...appointment}
-      // id={appointment.id}
-      // time={appointment.time}
-      interview={interview}
-      interviewers={interviewers}
-      bookInterview={bookInterview}
-      cancelInterview={deleteInterview}
-      
+        key={appointment.id}
+        {...appointment}
+        // id={appointment.id}
+        // time={appointment.time}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={deleteInterview}
+
       />
     );
   })
@@ -53,14 +53,14 @@ console.log("STATE", state)
         <hr className='sidebar__separator sidebar--centered' />
         <nav className='sidebar__menu'>
 
-        {/* receive the value and the function */}
-        <DayList days={state.days} day={state.day} setDay={setDay} />
+          {/* receive the value and the function */}
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
       </section>
       <section className='schedule'>
 
         {appointment}
-      <Appointment key="last" time="5pm" />
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
